@@ -111,8 +111,12 @@ def login():
         user_password = data['user_password']
         result_value = cursor.execute("SELECT * FROM user WHERE user_name = %s", ([user_name]))
         if result_value > 0:
+            print(data)
             user = cursor.fetchone()
+            print(check_password_hash(user['password'], user_password))
+
             if check_password_hash(user['password'], user_password):
+                print('checked')
                 access_token = create_access_token(identity=user_name)
                 response = {
                     "loggedIn": True,
@@ -122,7 +126,6 @@ def login():
                 }
                 return jsonify(response)
             else:
-                cursor.close()
                 response['loggedIn'] = False
                 return jsonify(response)
         else:

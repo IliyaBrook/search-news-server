@@ -1,4 +1,5 @@
 import yaml
+from boto.s3.connection import S3Connection
 from flask import Flask, request, jsonify, session
 from flask_cors import cross_origin
 from flask_jwt_extended import get_jwt_identity, jwt_required, JWTManager, create_access_token
@@ -14,8 +15,8 @@ app.config['MYSQL_USER'] = db['DB_USER']
 app.config['MYSQL_PASSWORD'] = db['DB_PASSWORD']
 app.config['MYSQL_DB'] = db['DB_NAME']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['SECRET_KEY'] = "b'3\/xabRlv]\/x82\/x0b\x86\x0b\xb7\x8a\x15\n'"
-app.config["JWT_SECRET_KEY"] = "b'\xf6\xfbT5\xc6\xe8U\x84\xd3\x83\xd2\xa9\x81\x1fq\xcb'"
+app.config['SECRET_KEY'] = S3Connection(os.environ['S3_KEY'], os.environ['SECRET_KEY'])
+app.config["JWT_SECRET_KEY"] = S3Connection(os.environ['S3_KEY'], os.environ['JWT_SECRET'])
 jwt = JWTManager(app)
 
 

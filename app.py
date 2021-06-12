@@ -1,6 +1,7 @@
 import os
 
 import yaml
+from boto.s3.connection import S3Connection
 from flask import Flask, request, jsonify, session
 from flask_cors import cross_origin
 from flask_jwt_extended import get_jwt_identity, jwt_required, JWTManager, create_access_token

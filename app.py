@@ -1,3 +1,5 @@
+import os
+
 import yaml
 from flask import Flask, request, jsonify, session
 from flask_cors import cross_origin
@@ -14,8 +16,10 @@ app.config['MYSQL_USER'] = db['DB_USER']
 app.config['MYSQL_PASSWORD'] = db['DB_PASSWORD']
 app.config['MYSQL_DB'] = db['DB_NAME']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET")
+jwt_key = S3Connection(os.environ['SECRET_KEY'])
+app_secret_key = S3Connection(os.environ['JWT_SECRET_KEY'])
+app.config['SECRET_KEY'] = app_secret_key
+app.config["JWT_SECRET_KEY"] = jwt_key
 jwt = JWTManager(app)
 
 

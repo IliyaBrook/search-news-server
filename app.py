@@ -15,8 +15,8 @@ app.config['MYSQL_USER'] = db['DB_USER']
 app.config['MYSQL_PASSWORD'] = db['DB_PASSWORD']
 app.config['MYSQL_DB'] = db['DB_NAME']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['SECRET_KEY'] = S3Connection(os.environ['JWT_SECRET_KEY'])
-app.config["JWT_SECRET_KEY"] = S3Connection(os.environ['SECRET_KEY'])
+app.config['SECRET_KEY'] = S3Connection(os.environ['S3_KEY'], os.environ['JWT_SECRET_KEY'])
+app.config["JWT_SECRET_KEY"] = S3Connection(os.environ['S3_KEY'], os.environ['SECRET_KEY'])
 jwt = JWTManager(app)
 
 

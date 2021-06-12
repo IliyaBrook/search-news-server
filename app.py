@@ -1,5 +1,3 @@
-import os
-
 import yaml
 from flask import Flask, request, jsonify, session
 from flask_cors import cross_origin
@@ -16,8 +14,8 @@ app.config['MYSQL_USER'] = db['DB_USER']
 app.config['MYSQL_PASSWORD'] = db['DB_PASSWORD']
 app.config['MYSQL_DB'] = db['DB_NAME']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')
+app.config['SECRET_KEY'] = 'super_secret1'
+app.config["JWT_SECRET_KEY"] = 'super_secret3'
 jwt = JWTManager(app)
 
 
